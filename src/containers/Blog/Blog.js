@@ -7,10 +7,11 @@ import NewPost from "../../components/NewPost/NewPost";
 import "./Blog.css";
 
 class Blog extends Component {
-  componentDidMount() {
-    axios
-      .get("https://jsonplaceholder.typicode.com/posts")
-      .then(response => console.log(response));
+  async componentDidMount() {
+    const { data } = await axios.get(
+      "https://jsonplaceholder.typicode.com/posts"
+    );
+    console.log(data);
   }
 
   render() {
