@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 
 import axios from "../../../axios";
 import Post from "../../../components/Post/Post";
@@ -11,6 +10,7 @@ class Posts extends Component {
   };
 
   async componentDidMount() {
+    console.log(this.props);
     try {
       const { data } = await axios.get("/posts");
 
@@ -24,21 +24,20 @@ class Posts extends Component {
     }
   }
 
-  postSelectedHandler = selectedPostId => {
-    this.setState({ selectedPostId });
+  postSelectedHandler = id => {
+    this.props.history.push({ pathname: "/" + id });
   };
 
   render() {
     let posts = <p styled={{ textAlign: "center" }}>Something went wrong!</p>;
     if (!this.state.error) {
       posts = this.state.posts.map(post => (
-        <Link to={"/" + post.id} key={post.id}>
-          <Post
-            title={post.title}
-            author={post.author}
-            clicked={() => this.postSelectedHandler(post.id)}
-          />
-        </Link>
+        <Post
+          key={post.id}
+          title={post.title}
+          author={post.author}
+          clicked={() => this.postSelectedHandler(post.id)}
+        />
       ));
     }
     return <section className="Posts">{posts}</section>;
