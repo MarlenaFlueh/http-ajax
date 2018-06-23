@@ -41,6 +41,7 @@ class Blog extends Component {
         <Switch>
           <Route path="/new-post" component={NewPost} />
           <Route path="/" component={Posts} />
+          <Route render={() => <h1>unknown route</h1>} />
         </Switch>
       </div>
     );
