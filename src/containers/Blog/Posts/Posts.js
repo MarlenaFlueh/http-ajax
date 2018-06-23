@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import { Route } from "react-router-dom";
 
 import axios from "../../../axios";
 import Post from "../../../components/Post/Post";
 import "./Posts.css";
+import FullPost from "../FullPost/FullPost";
 
 class Posts extends Component {
   state = {
@@ -10,7 +12,6 @@ class Posts extends Component {
   };
 
   async componentDidMount() {
-    console.log(this.props);
     try {
       const { data } = await axios.get("/posts");
 
@@ -40,7 +41,12 @@ class Posts extends Component {
         />
       ));
     }
-    return <section className="Posts">{posts}</section>;
+    return (
+      <div>
+        <section className="Posts">{posts}</section>
+        <Route path={this.props.match.url + ":id"} exact component={FullPost} />
+      </div>
+    );
   }
 }
 
