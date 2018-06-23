@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Redirect } from "react-router-dom";
 
 import "./NewPost.css";
 
@@ -23,14 +22,13 @@ class NewPost extends Component {
       "https://jsonplaceholder.typicode.com/posts",
       data
     );
-    this.setState({ submitted: true });
+    this.props.history.push("/");
     console.log(res);
   };
 
   render() {
     return (
       <div className="NewPost">
-        {this.state.submitted ? <Redirect to="/" /> : null}
         <h1>Add a Post</h1>
         <label>Title</label>
         <input
